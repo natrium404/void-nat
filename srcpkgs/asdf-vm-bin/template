@@ -1,0 +1,20 @@
+# Template file for 'asdf-vm-bin'
+pkgname=asdf-vm-bin
+version=0.20.2
+revision=1
+archs="x86_64"
+create_wrksrc=yes
+short_desc="The multiple runtime version manager"
+maintainer="Natrium <heynatrium@proton.me>"
+license="MIT"
+homepage="https://asdf-vm.com/"
+changelog="https://github.com/asdf-vm/asdf/blob/master/CHANGELOG.md"
+distfiles="https://github.com/asdf-vm/asdf/releases/download/v${version}/asdf-v${version}-linux-amd64.tar.gz"
+checksum=6d45e6fab12f50a259b5643adf06a2e77af30a87300b4402440eda09af467a6d
+provides="asdf-vm-${version}_${revision}"
+nopie=yes
+nostrip=yes
+
+do_install() {
+	vbin asdf
+}
