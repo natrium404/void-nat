@@ -1,0 +1,7 @@
+masterdir/
+hostdir/
+
+# editor / OS
+*.swp
+*~
+.DS_Store
