@@ -27,7 +27,7 @@ shift || true
 
 BINPKGS="$HOSTDIR/binpkgs"
 SOURCES="$HOSTDIR/sources"
-MASTERDIR="$PKGS_DIR/masterdir"
+# MASTERDIR="$PKGS_DIR/masterdir"
 
 # rm wrapper honoring dry-run
 _rm() {
