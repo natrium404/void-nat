@@ -1,0 +1,17 @@
+# Template file for 'tuxedo-bin'
+pkgname=tuxedo-bin
+version=2026.8.1
+revision=1
+archs="x86_64"
+short_desc="Fast, keyboard-driven terminal UI for todo.txt"
+maintainer="Natrium <heynatrium@proton.me>"
+license="MIT"
+homepage="https://github.com/webstonehq/tuxedo"
+changelog="https://github.com/webstonehq/tuxedo/releases"
+distfiles="https://github.com/webstonehq/tuxedo/releases/download/v${version}/tuxedo-v${version}-${archs}-unknown-linux-gnu.tar.gz"
+checksum=b1ebbbc858b9bfda64631164e8fd5eeacda759e5a87165d1296ddc9d6b701d59
+conflicts="tuxedo"
+
+do_install() {
+	vbin tuxedo
+}
