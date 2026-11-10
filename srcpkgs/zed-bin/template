@@ -1,0 +1,43 @@
+# Template file for 'zed-bin'
+pkgname=zed-bin
+version=0.175.5
+revision=1
+archs="x86_64"
+create_wrksrc=yes
+short_desc="High-performance, multiplayer code editor from the creators of Atom"
+maintainer="Natrium <heynatrium@proton.me>"
+license="GPL-3.0-or-later, Apache-2.0"
+homepage="https://zed.dev"
+changelog="https://zed.dev/releases"
+distfiles="https://github.com/zed-industries/zed/releases/download/v${version}/zed-linux-x86_64.tar.gz"
+checksum=9c0a93e8aa97c58e6e2561f89b931129a4eac899b182be4e580d34ea5ee5ea26
+provides="zed-${version}_${revision}"
+conflicts="zed"
+nopie=yes
+nostrip=yes
+
+
+do_install() {
+	vmkdir opt/zed
+	vcopy "zed.app/*" opt/zed
+
+	chmod 0755 ${DESTDIR}/opt/zed/bin/zed \
+		${DESTDIR}/opt/zed/libexec/zed-editor
+
+	vmkdir usr/bin
+	ln -sf /opt/zed/bin/zed ${DESTDIR}/usr/bin/zed
+
+	for _desktop in zed.app/share/applications/*.desktop; do
+		vinstall "$_desktop" 644 usr/share/applications
+		vsed -i "${DESTDIR}/usr/share/applications/${_desktop##*/}" \
+			-e 's|^Exec=.*|Exec=/usr/bin/zed %U|' \
+			-e 's|^Icon=.*|Icon=zed|'
+	done
+
+	vinstall zed.app/share/icons/hicolor/512x512/apps/zed.png 644 usr/share/icons/hicolor/512x512/apps
+	vinstall zed.app/share/icons/hicolor/1024x1024/apps/zed.png 644 usr/share/icons/hicolor/1024x1024/apps
+
+	if [ -f "zed.app/licenses.md" ]; then
+		vlicense "zed.app/licenses.md"
+	fi
+}
